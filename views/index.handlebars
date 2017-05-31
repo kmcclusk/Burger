@@ -1,0 +1,52 @@
+<div>
+  <img src= "https://upload.wikimedia.org/wikipedia/commons/f/ff/Bob%27s_Burgers_logo.png" alt="bob's burgers">
+</div>
+
+<h1>Try the burger of the day</h1>
+
+<div class="devour">
+  <ul>
+    {{#each burgers}}
+      {{#unless this.devour}}
+        <li>
+          {{this.burger_name}}
+
+          <form action="/{{this.id}}?_method=PUT" method="POST">
+            <input type="hidden" name="devoured" value="false">
+            <button type="submit">DEVOUR</button>
+          </form>
+
+        </li>
+      {{/unless}}
+    {{/each}}
+  </ul>
+</div>
+
+<div class="devoured">
+  <ul>
+    {{#each burgers}}
+      {{#if this.devour}}
+        <li>
+          {{this.burger_name}}
+          {{this.episode}}
+
+          <form action="/{{this.id}}?_method=PUT" method="POST">
+            <input type="hidden" name="devoured" value="false">
+          </form>
+
+        </li>
+      {{/if}}
+    {{/each}}
+  </ul>
+</div>
+
+<h2>New Burger of the Day:</h2>
+<form class="create-update-form" action="/" method="POST">
+
+  <div class="form-group">
+    <input type="text" id="burgerInput">
+    <input type="text" id="episodeInput">
+  </div>
+
+  <button type="submit">Add Burger</button>
+</form>
